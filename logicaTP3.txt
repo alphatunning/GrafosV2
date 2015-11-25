@@ -1,0 +1,45 @@
+1 2 3 4 
+
+1 
+c =2
+
+2
+c =6
+
+3
+c= 10
+
+4
+c=1
+
+foreach(Vertice verticeAtual in listaVertices){
+List listaVertices = new ArrayList<TagVertice>();
+
+mediaGeodesica = Grafo.getMediaGeodesica(verticeAtual);
+ordem = grafo.getOrdem()-1;
+
+centralidade= ordem/mediaGeodesica;
+
+TagVertice vertice = new TagVertice(nome valorCentralidade);
+
+
+listaVertice.Add(vertice);
+
+List teste = new ArrayList <TagVertice>();
+    teste.add(verticeatual);
+    teste.sort(verticeatual);
+    
+ List listaVertices = new ArrayList <TagVertice> ();
+        listaVertices.add(VerticeAtual);
+        Collections.sort(listaVertices);
+        System.out.println(listaVertices.get(0));
+	System.out.println(listaVertices.get(1));
+	System.out.println(listaVertices.get(2));
+
+
+
+
+
+
+
+}
