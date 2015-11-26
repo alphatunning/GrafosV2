@@ -106,6 +106,10 @@ public class Principal extends etag.Controladora {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        Ordem = new javax.swing.JMenuItem();
+        Tamanho = new javax.swing.JMenuItem();
+        CentralidadeProximidade = new javax.swing.JMenuItem();
 
         jToolBar2.setRollover(true);
 
@@ -374,6 +378,34 @@ public class Principal extends etag.Controladora {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu5.setText("Trabalho Prático II");
+
+        Ordem.setText("Ordem");
+        Ordem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OrdemActionPerformed(evt);
+            }
+        });
+        jMenu5.add(Ordem);
+
+        Tamanho.setText("Tamanho");
+        Tamanho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TamanhoActionPerformed(evt);
+            }
+        });
+        jMenu5.add(Tamanho);
+
+        CentralidadeProximidade.setText("Centralidade de proximidade");
+        CentralidadeProximidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CentralidadeProximidadeActionPerformed(evt);
+            }
+        });
+        jMenu5.add(CentralidadeProximidade);
+
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -480,6 +512,27 @@ public class Principal extends etag.Controladora {
         int delay = JPrompt.readIntPane("Timer", "Informe um intervalo de coloração entre os vértices (em milissegundos)", "?");
         this.animacaoColorirVerticesArestas(delay);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void OrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdemActionPerformed
+        
+        GrafoController grafoController = new GrafoController();
+        
+        JPrompt.printPane("Quantidade de Vertices: " + grafoController.obterOrdemGrafo(this.grafo));
+
+    }//GEN-LAST:event_OrdemActionPerformed
+
+    private void TamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TamanhoActionPerformed
+        
+        GrafoController grafoController = new GrafoController();
+        
+        JPrompt.printPane("Quantidade de Vertices: " + grafoController.obterTamanhoGrafo(this.grafo));
+    }//GEN-LAST:event_TamanhoActionPerformed
+
+    private void CentralidadeProximidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CentralidadeProximidadeActionPerformed
+        
+        GrafoController grafoController = new GrafoController();
+        grafoController.obterCentralidadeProximidade(this.grafo);
+    }//GEN-LAST:event_CentralidadeProximidadeActionPerformed
     
     /**
      * Método principal para execução da janela gráfica da ferramenta.
@@ -496,6 +549,9 @@ public class Principal extends etag.Controladora {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CentralidadeProximidade;
+    private javax.swing.JMenuItem Ordem;
+    private javax.swing.JMenuItem Tamanho;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -508,6 +564,7 @@ public class Principal extends etag.Controladora {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
