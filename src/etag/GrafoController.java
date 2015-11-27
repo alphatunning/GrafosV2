@@ -7,6 +7,12 @@ package etag;
 
 import console.JPrompt;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  *
@@ -17,8 +23,15 @@ public class GrafoController {
     private Grafo grafo;
     public int Ordem;
     public int Tamanho;
-
+    private Hashtable<Vertice, Double> HashVerticesCP;
+    private ArrayList<Map.Entry<Vertice, Double>> HashList;
+    
+    public GrafoController(Grafo pGrafo){
+        grafo = pGrafo;
+    }
+    
     public int getOrdem() {
+        Ordem = grafo.getMapaVertices().size();
         return Ordem;
     }
 
@@ -27,9 +40,64 @@ public class GrafoController {
     }
 
     public int getTamanho() {
-        return Tamanho;
+       Tamanho = grafo.getArestasGraficas().size();
+       return Tamanho;      
     }
 
+    public String getTopNCP(int N) {
+        
+        String mensagem = "";
+               
+        for (int i = 0; i < N; i++) {
+            mensagem += "Top " + (i + 1) + " CP: " 
+                    + HashList.get(i).getKey().getID() + " - " 
+                    + HashList.get(i).getKey().getValor() + " - "
+                    + HashList.get(i).getValue() + "\n";
+        }
+                
+        return mensagem;
+    }
+
+    public void RankearCP() {
+        
+        HashVerticesCP = new Hashtable<Vertice, Double>();
+        
+        for (Vertice v : grafo.getMapaVertices().values()){
+
+             HashVerticesCP.put(v, calcularCP(v));
+
+        }
+
+        HashList = new ArrayList(HashVerticesCP.entrySet());
+        
+        Collections.sort(HashList, new Comparator<Map.Entry<Vertice, Double>>(){
+
+            @Override
+            public int compare(Map.Entry<Vertice, Double> o1, Map.Entry<Vertice, Double> o2) {
+               return o2.getValue().compareTo(o1.getValue());
+            }
+        }
+        );
+               
+    }
+
+    public Double calcularCP(Vertice v){
+        
+        return (getOrdem() - 1) / (double)Geodesica(v);
+        
+    }
+    
+    public int Geodesica(Vertice v){
+        
+        BuscaController Busca = new BuscaController(this.grafo);
+                
+        Busca.BuscaLargura(v);
+        
+        return Busca.getSomaGeodesica();
+                          
+    }
+            
+    
     public void setTamanho(int Tamanho) {
         this.Tamanho = Tamanho;
     }
@@ -59,70 +127,5 @@ public class GrafoController {
     public void setListaAresta(ArrayList<Aresta> listaAresta) {
         this.listaAresta = listaAresta;
     }
-    
-    public GrafoController(){
-        
-        grafo = new Grafo();
-        listaVertices = new ArrayList<Vertice>();
-        listaAresta = new ArrayList<Aresta>();
-        
-    }
-    
-    public int obterOrdemGrafo(Grafo p_grafo){
-       
-       this.grafo = p_grafo;
-       Ordem = grafo.getMapaVertices().size();
-       return Ordem;
-    }
-    
-     public int obterTamanhoGrafo(Grafo p_grafo){
-       
-       this.grafo = p_grafo;
-       Tamanho = grafo.getArestasGraficas().size();
-       return Tamanho;      
-    }
-     
-     public void obterCentralidadeProximidade(Grafo p_grafo){
-         //ListaVertices
-         int centralidade = 0;
-         int ordemFormula = 0;
-         int mediaGeodesica = 0;
-         this.grafo = p_grafo;
-        
-         for (Vertice vert : grafo.getMapaVertices().values() ){
             
-             mediaGeodesica = calculaMediaGeodesicaVertice(vert,grafo);
-             ordemFormula = getOrdem() -1;
-
-             centralidade= ordemFormula/mediaGeodesica;
-             
-             //Add Vertice(Centralidade)
-             //listaVertice.Add(vertice);
-         }
-//      Collections.sort(listaVertices);
-//      JPrompt.printPane("Primeiro : " + listaVertices.get(0));
-// 	JPrompt.printPane("Segundo : " + listaVertices.get(1));
-// 	JPrompt.printPane("Segundo : " + listaVertices.get(2));
-         
-     }
-     
-     public int calculaMediaGeodesicaVertice(Vertice p_vertice, Grafo grafo){
-         
-        double fracaoGeodesica = 0;
-        int nGeodesica = grafo.getMapaVertices().keySet().size(); 
-        int somatorioGeodesica = 0;
-        double mediaGeodesica = 0;
-        
-        fracaoGeodesica = 1 / (0.5 * nGeodesica *(nGeodesica + 1));
-
-//        for (ParVertice p: Largura.getListaParVertices()){
-//            somatorioGeodesica += p.getGeodesica();
-//        }
-        
-        mediaGeodesica = fracaoGeodesica * somatorioGeodesica; 
-        
-        //Vai ter que retornar a media geodesica para o vertice atual;
-         return 0;
-     }
-    
 }

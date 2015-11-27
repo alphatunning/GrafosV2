@@ -378,7 +378,7 @@ public class Principal extends etag.Controladora {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu5.setText("Trabalho Prático II");
+        jMenu5.setText("Trabalho Prático III");
 
         Ordem.setText("Ordem");
         Ordem.addActionListener(new java.awt.event.ActionListener() {
@@ -515,23 +515,29 @@ public class Principal extends etag.Controladora {
 
     private void OrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdemActionPerformed
         
-        GrafoController grafoController = new GrafoController();
+        GrafoController grafoController = new GrafoController(this.grafo);
         
-        JPrompt.printPane("Quantidade de Vertices: " + grafoController.obterOrdemGrafo(this.grafo));
+        JPrompt.printPane("Quantidade de Vértices: " + grafoController.getOrdem());
 
     }//GEN-LAST:event_OrdemActionPerformed
 
     private void TamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TamanhoActionPerformed
         
-        GrafoController grafoController = new GrafoController();
+        GrafoController grafoController = new GrafoController(this.grafo);
         
-        JPrompt.printPane("Quantidade de Vertices: " + grafoController.obterTamanhoGrafo(this.grafo));
+        JPrompt.printPane("Quantidade de Arestas: " + grafoController.getTamanho());
     }//GEN-LAST:event_TamanhoActionPerformed
 
     private void CentralidadeProximidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CentralidadeProximidadeActionPerformed
+              
+        GrafoController grafoController = new GrafoController(this.grafo);
         
-        GrafoController grafoController = new GrafoController();
-        grafoController.obterCentralidadeProximidade(this.grafo);
+        grafoController.RankearCP();
+        
+        String mensagem = grafoController.getTopNCP(3);
+        
+        JPrompt.printPane(mensagem);
+                      
     }//GEN-LAST:event_CentralidadeProximidadeActionPerformed
     
     /**

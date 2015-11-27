@@ -200,7 +200,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Trabalho Pr&#xe1;tico II"/>
+            <Property name="text" type="java.lang.String" value="Trabalho Pr&#xe1;tico III"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="Ordem">
